@@ -9,19 +9,7 @@ jobs:
             - name: Checkout Repository
               uses: actions/checkout@v5
 
-            - name: Install cowsay
-              run: sudo apt-get install -y cowsay
-
-            - name: Excecute the cowsay command
-              run: cowsay -f dragon "Hello from Dragon-GitHub Actions!" >> dragon.txt
-
-            - name: File exists
-              run : grep -i "dragon" dragon.txt
-
-            - name: Read file
-              run: cat dragon.txt
-
-            - name: List repo files
-              run: ls-ltra
+            - name: Excecuting the shellscript command
+              run: ./ascii-script.sh
 
             
