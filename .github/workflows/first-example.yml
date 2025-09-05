@@ -10,7 +10,7 @@ jobs:
               uses: actions/checkout@v5
 
             - name: Read and list the files.
-              run:
+              run: |
                  echo "Hello, welcome to your first GitHub Actions workflow!"
                  ls-ltra
                  cat README.md
