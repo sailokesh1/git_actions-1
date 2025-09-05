@@ -12,14 +12,22 @@ jobs:
             - name: Excecute cowsay command
               run: cowsay -f dragon "Hello from GitHub Actions!" >> dragon.txt
 
-            - name: Sleep for 30 seconds
-              run: sleep 30
+            - name: Upload the dragon file.
+              uses: actions/upload-artifact@v4
+              with:
+                name: dragon-text-file
+                path: dragon.txt 
+
+
+
     test-job-2:
         needs: build-job-1
         runs-on: ubuntu-latest
         steps:
-            - name: Sleep for 10 seconds
-              run: sleep 10 
+            - name: Download the dragon file.
+              uses: actions/download-artifact@v4
+              with:
+                name: dragon-text-file 
             
             - name: Test file exists
               run: grep -i "dragon" ./dragon.txt
@@ -28,8 +36,16 @@ jobs:
         needs: test-job-2
         runs-on: ubuntu-latest
         steps:
+
+            - name: Download the dragon file.
+              uses: actions/download-artifact@v4
+              with:
+                name: dragon-text-file
+
             - name: Read file
-              run: cat dragon.txt
+              run: |
+                ls -ltra
+                cat dragon.txt
             
             - name: Deploy
               run: echo "Deploying the application..."
